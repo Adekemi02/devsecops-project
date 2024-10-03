@@ -1,9 +1,17 @@
-FROM ubuntu:20.04
+FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y python3 python3-pip
+WORKDIR /app
 
-RUN pip3 install flask
+RUN apt-get update && apt-get install -y python3 python3-venv python3-pip
+
+RUN python3 -m venv /app/venv
+COPY requirements.txt requirements.txt
+RUN /app/venv/bin/pip install -r requirements.txt
 
 COPY app.py /opt/
 
-ENTRYPOINT FLASK_APP=/opt/app.py flask run --host=0.0.0.0 --port=8080
+ENV PATH="/app/venv/bin:$PATH"
+ENV FLASK_APP=/opt/app.py
+
+EXPOSE 5000
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
