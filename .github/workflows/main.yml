@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    name: Build Docker Image
+    name: Set up python application
     runs-on: ubuntu-latest
     strategy:
       matrix:
