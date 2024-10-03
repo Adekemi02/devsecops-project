@@ -44,7 +44,7 @@ jobs:
       - name: Save build output
         uses: actions/upload-artifact@v4
         with:
-          name: docker-image
+          name: docker-image-${{ github.run_id }}
           path: ./Dockerfile
 
   test:
