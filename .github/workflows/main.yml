@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    name: Set up python application
+    name: Build Python Application
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -44,7 +44,7 @@ jobs:
       - name: Save build output
         uses: actions/upload-artifact@v4
         with:
-          name: docker-image-${{ github.run_id }}
+          name: docker-image-${{ github.run_id }}-${{ github.sha }}-${{ github.event.pull_request.head.sha || github.run_number }}
           path: ./Dockerfile
 
   test:
