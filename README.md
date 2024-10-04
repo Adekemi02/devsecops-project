@@ -12,7 +12,7 @@
 ---
 
 <div align="center">
-  <h1><img src="./static/blog/simple-webapp-flask-master/images/sonarcloud-report2.png" alt="Logo" width="90%" height="40%">
+  <h1><img src="./simple-webapp-flask-master/images/sonarcloud-report2.png" alt="Logo" width="90%" height="40%">
   </h1>
 </div>
 
@@ -20,7 +20,7 @@
   <p align="center">
     <a href="https://github.com/Adekemi02/devsecops-project#readme"><strong>Explore the Docs »</strong></a>
     <br />
-    <a href="https://github.com/Adekemi02/devsecops-project/blob/main/static/blog/images/sonarcloud-report2.png">View Demo</a>
+    <a href="https://github.com/Adekemi02/devsecops-project/blob/main/simple-webapp-flask-master/images/sonarcloud-report2.png">View Demo</a>
     ·
     <a href="https://github.com/Adekemi02/devsecops-project/issues">Report Bug</a>
     ·
@@ -41,11 +41,13 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li><a href="#features">Features</a></li>    
-    <li><a href="#future-features">Future Features</a></li>
-    <li><a href="#getting-started">Getting started</a></li>
-    <li><a href="#future-plans">Future plans</a></li>
-    <li><a href="#sample">Sample</a></li>
+    <li><a href="#contanerization">Containerization</a></li>    
+    <li><a href="#CI/CD-process">CI/CD Process</a></li>
+    <li><a href="#requirements">Requiremments</a></li>
+    <li><a href="#running-project-locally">Running Project Locally</a></li>
+    <li><a href="#deployment-on-kubernetes">Deployment on Kubernetes</a></li>
+    <li><a href="#github-actions-ci/cd-configuration">GitHub Actions CI/CD Configuration</a></li>
+    <li><a href="#security-measures">Security Measures</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -67,13 +69,13 @@ The Simple Web Application Flask API is designed to provide a lightweight RESTfu
 
 ---
 
-### Containerization
+## Containerization
 
 The API was containerized using Docker by creating a `Dockerfile` that defines the environment for the Flask application. The image is built and pushed to Docker Hub, allowing it to be pulled and deployed on any container orchestration platform.
 
 ---
 
-### CI/CD Process
+## CI/CD Process
 The Continuous Integration and Continuous Deployment (CI/CD) process is automated using GitHub Actions. The workflow is defined in 
 `.github/workflows/main.yml`
 which includes steps for:
@@ -84,22 +86,15 @@ which includes steps for:
 
 ---
 
-### Deployment on Kubernetes
-
-The API is deployed on a Kubernetes cluster using the defined Kubernetes manifests. The deployment includes:
-- A `Deployment` for managing the application pods.
-- A `Service` for exposing the application.
-- Role-Based Access Control (RBAC) with a `Role`, `RoleBinding`, and `ServiceAccount` for managing permissions.
-- Security measures such as limiting the permissions of the service account and defining resource limits for the containers.
-
----
-
 ## Requirements
 
-- Docker
-- Kubernetes (Minikube or Kind)
-- kubectl
+Below are the requirements to get this working on a base linux system
+
+- Docker or install [here](https://docs.docker.com/engine/install/)
+- Kubernetes (KinD) or install [here](https://kind.sigs.k8s.io/docs/user/quick-start#installation)
+- kubectl or install [here](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 - GitHub account for CI/CD
+- DockerHub account
 
 ---
 
@@ -112,7 +107,15 @@ To run the project locally, follow these steps:
   cd simple-webapp-flask-master
   ```
 
-2. **Build the Docker Image**
+2. **Install Python and its dependencies**
+  ```bash
+  apt-get install -y python3 python3-setuptools python3-dev build-essential python3-pip default-libmysqlclient-dev
+  ```
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+3. **Build the Docker Image**
   ```bash
   docker build -t simple-webapp-flask .
   ```
@@ -122,81 +125,100 @@ To run the project locally, follow these steps:
   docker run -p 5000:80 simple-webapp-flask
   ```
 
-4. **Access the Application Open your web browser and go to http://localhost:5000**
+4. **Open your web browser and go to http://localhost:5000**
+  ```
+  http://<IP>:5000                            => Welcome
+  http://<IP>:5000/how%20are%20you            => I am good, how about you?
+  ```
 
 ---
 
-### Deployment on Kubernetes
+## Deployment on Kubernetes
+
+The API is deployed on a Kubernetes cluster using the defined Kubernetes manifests. The deployment includes:
+- A `Deployment` for managing the application pods.
+- A `Service` for exposing the application.
+- Role-Based Access Control (RBAC) with a `Role`, `RoleBinding`, and `ServiceAccount` for managing permissions.
+- Security measures such as limiting the permissions of the service account and defining resource limits for the containers.
+
 To deploy the API on Kubernetes, follow these steps:
-1. **Set Up Your Kubernetes Cluster If you are using KinD (Kubernetes in Docker):**
+1. **Set Up Your Kubernetes Cluster**
   ```bash
   kind create cluster
   ```
-2. **Apply the Kubernetes Manifests Navigate to the directory containing your Kubernetes**
+2. **Apply the Kubernetes Manifests**
   ```bash
-  kubectl apply -f k8s/deployment.yml
-  kubectl apply -f k8s/service.yml
+  kubectl apply -f ./deployment.yml
+  kubectl apply -f ./service.yml
   ```
-3. **Access the Application Use kubectl port-forward to access the application**
+3. **Use kubectl port-forward to access the application**
   ```bash
   kubectl port-forward service/simple-webapp-flask-service 5000:80
   ```
-4. Open your web browser and go to http://localhost:5000
+4. **Open your web browser and go to http://localhost:5000**
+  ```
+  http://<IP>:5000                            => Welcome
+  http://<IP>:5000/how%20are%20you            => I am good, how about you?
+  ```
 
 ---
 
-# GitHub Actions CI/CD Configuration
+## GitHub Actions CI/CD Configuration
 
-The CI/CD workflow is defined in the .github/workflows/ci-cd.yml file. This file automates the build, test, and deployment processes. It includes:
+The CI/CD workflow is defined in the `.github/workflows/main.yml` file. This file automates the build, test, and deployment processes. It includes:
 - Build Stage: Builds the Docker image and scans it.
-- Test Stage: Test the image upon successful build and Pushes the Docker image to Docker Hub.
+- Test Stage: Test the image upon successful build and pushes the Docker image to Docker Hub.
 - Deploy Stage: Deploys the application to Kubernetes.
 
 ---
 
-# Security Measures
-- Role-Based Access Control (RBAC) is implemented with a Role and RoleBinding to restrict access to Kubernetes resources.
-- Resource limits are defined in the Deployment manifest to prevent resource starvation.
-- The ServiceAccount is used to minimize the permissions granted to the application.
-- Flake was implemented to scan the code for syntax errors
-- The code is automatically tested using pytest to check for correctness
-- Trivy was implemnted to scan for vulnerabilities
+## Security Measures
 
-Below are the steps required to get this working on a base linux system.
-  
-  - **Install all required dependencies**
-  - **Install and Configure Web Server**
-  - **Start Web Server**
-   
-## 1. Install all required dependencies
-  
-  Python and its dependencies
-  ```bash
-  apt-get install -y python3 python3-setuptools python3-dev build-essential python3-pip default-libmysqlclient-dev
-  ```
-   
-## 2. Install and Configure Web Server
+1. **Role-Based Access Control (RBAC)**
+  - Role and RoleBinding are implemented to restrict access to Kubernetes resources, ensuring that only the necessary permissions are granted. This limits the scope of operations the application and associated users can perform within the cluster, adhering to the principle of least privilege.
 
-Install Python Flask dependency
-```bash
-pip3 install flask
-pip3 install flask-mysql
-```
+2. **Resource Limits**
+  - Resource limits (CPU and memory) are specified in the Deployment manifest to ensure efficient resource allocation. These limits prevent resource starvation by capping how much CPU and memory the application can consume, preventing it from overwhelming the system and affecting other services.
 
-- Copy `app.py` or download it from a source repository
-- Configure database credentials and parameters 
+3. **Service Account**
+  - A ServiceAccount is assigned to the application to ensure it runs with minimal permissions. This limits the application's access to cluster-wide resources, increasing the security of the deployment by reducing unnecessary privileges.
 
-## 3. Start Web Server
+4. **Code Quality Checks**
+  - Flake8 is integrated into the CI/CD pipeline to scan the codebase for syntax errors, undefined names, and general code style issues. This ensures that the code adheres to best practices and is free from common errors, increasing the overall quality and maintainability of the project.
 
-Start web server
-```bash
-FLASK_APP=app.py flask run --host=0.0.0.0
-```
+5. **Automated Testing**
+  - The code is automatically tested using Pytest in the CI/CD pipeline. This suite of tests ensures the correctness of the code and validates that new changes do not break existing functionality, providing confidence in code stability.
 
-## 4. Test
+6. **Vulnerability Scanning**
+  - Trivy is integrated to scan the Docker images for vulnerabilities, specifically checking for any high or critical severity issues. This helps identify potential security risks early in the development cycle, ensuring the application is deployed with secure dependencies and packages.
 
-Open a browser and go to URL
-```
-http://<IP>:5000                            => Welcome
-http://<IP>:5000/how%20are%20you            => I am good, how about you?
-```
+## Sample
+
+<div align="center">
+  <h1><img src="./simple-webapp-flask-master/images/sonarcloud-report.png" alt="Logo">
+  </h1>
+</div>
+
+---
+
+## Contact
+
+Barakat Adisa - [twitter](https://twitter.com/adisa_adekhemie) - 
+[linkedin](https://linkedin.com/in/adekhemieadisa)
+adisabarakatadekemi@gmail.com
+
+Project Link: [DevSecOps Project](https://github.com/Adekemi02/devsecops-project)
+
+---
+
+## Contributing
+
+Contributions are welcome! Please submit a pull request or open an issue if you have suggestions or find bugs.
+
+---
+## License
+
+Distributed under the MIT License. See <a href="https://github.com/Adekemi02/devsecops-project?tab=MIT-1-ov-file">LICENSE</a> for more information.
+
+---
+
