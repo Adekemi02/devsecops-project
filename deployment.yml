@@ -67,6 +67,7 @@ spec:
           volumeMounts:
             - name: ephemeral
               mountPath: "/tmp"
+      automountServiceAccountToken: false
       volumes:
         - name: ephemeral
           emptyDir: {}        
