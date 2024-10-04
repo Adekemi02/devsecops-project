@@ -118,6 +118,9 @@ jobs:
           kubectl apply -f ./deployment.yml
           kubectl apply -f ./service.yml
 
+      - name: Wait for Deployment rollout to complete
+        run: kubectl rollout status deployment/simple-webapp-flask --timeout=120s
+
       - name: Wait for Pods to be Ready
         run: kubectl wait --for=condition=ready pod -l app=simple-webapp-flask --timeout=60s
 
