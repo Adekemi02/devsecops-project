@@ -100,3 +100,24 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Install KinD
+        run: |
+          curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.24.0/kind-linux-amd64
+          chmod +x ./kind
+          sudo mv ./kind /usr/local/bin/kind
+
+      - name: Create KinD cluster
+        run: kind create cluster
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/kubectl
+
+       - name: Deploy application to Kubernetes
+          run: |
+            kubectl apply -f kubernetes/deployment.yml
+            kubectl apply -f kubernetes/service.yml

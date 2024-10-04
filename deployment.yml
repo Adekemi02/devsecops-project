@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Simple-webapp-flask-deployment
+  labels:
+    app: simple-webapp-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-webapp-flask
+  template:
+    metadata:
+      labels:
+        app: simple-webapp-flask 
+    spec:
+      containers:
+      - name: simple-webapp-flask
+        image: adekhemie/simple-webapp-flask
+        ports:
+        - containerPort: 5000
