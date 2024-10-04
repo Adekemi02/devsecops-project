@@ -44,10 +44,14 @@
     <li><a href="#contanerization">Containerization</a></li>    
     <li><a href="#CI/CD-process">CI/CD Process</a></li>
     <li><a href="#requirements">Requiremments</a></li>
-    <li><a href="#running-project-locally">Running Project Locally</a></li>
+    <li><a href="#running-the-project-locally">Running the Project Locally</a></li>
     <li><a href="#deployment-on-kubernetes">Deployment on Kubernetes</a></li>
-    <li><a href="#github-actions-ci/cd-configuration">GitHub Actions CI/CD Configuration</a></li>
-    <li><a href="#security-measures">Security Measures</a></li>
+    <li><a href="#github-actions-configuration">GitHub Actions CI/CD Configuration</a></li>
+    <li><a href="#security-measures">Security Measures</a>
+    <ul>
+        <li><a href="#sample">Sample</a></li>
+      </ul>
+    </li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -61,17 +65,23 @@
 
 The Simple Web Application Flask API is designed to provide a lightweight RESTful API built with Flask. It allows users to perform basic CRUD operations, showcasing the essential features of a modern web application. The API is containerized using Docker for easy deployment and scalability.
 
+<p align="right"><a href="#readme-top">back to top</a></p>
+
 ---
 
 ## Built with
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) and ![MySQL](https://www.mysql.com/)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
+
+<p align="right"><a href="#readme-top">back to top</a></p>
 
 ---
 
 ## Containerization
 
 The API was containerized using Docker by creating a `Dockerfile` that defines the environment for the Flask application. The image is built and pushed to Docker Hub, allowing it to be pulled and deployed on any container orchestration platform.
+
+<p align="right"><a href="#readme-top">back to top</a></p>
 
 ---
 
@@ -84,6 +94,8 @@ which includes steps for:
 - Pushing the Docker image to Docker Hub.
 - Deploying the application to a Kubernetes cluster.
 
+<p align="right"><a href="#readme-top">back to top</a></p>
+
 ---
 
 ## Requirements
@@ -95,6 +107,8 @@ Below are the requirements to get this working on a base linux system
 - kubectl or install [here](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 - GitHub account for CI/CD
 - DockerHub account
+
+<p align="right"><a href="#readme-top">back to top</a></p>
 
 ---
 
@@ -131,6 +145,8 @@ To run the project locally, follow these steps:
   http://<IP>:5000/how%20are%20you            => I am good, how about you?
   ```
 
+<p align="right"><a href="#readme-top">back to top</a></p>
+
 ---
 
 ## Deployment on Kubernetes
@@ -161,14 +177,18 @@ To deploy the API on Kubernetes, follow these steps:
   http://<IP>:5000/how%20are%20you            => I am good, how about you?
   ```
 
+<p align="right"><a href="#readme-top">back to top</a></p>
+
 ---
 
-## GitHub Actions CI/CD Configuration
+## GitHub Actions Configuration
 
 The CI/CD workflow is defined in the `.github/workflows/main.yml` file. This file automates the build, test, and deployment processes. It includes:
 - Build Stage: Builds the Docker image and scans it.
 - Test Stage: Test the image upon successful build and pushes the Docker image to Docker Hub.
 - Deploy Stage: Deploys the application to Kubernetes.
+
+<p align="right"><a href="#readme-top">back to top</a></p>
 
 ---
 
@@ -192,12 +212,14 @@ The CI/CD workflow is defined in the `.github/workflows/main.yml` file. This fil
 6. **Vulnerability Scanning**
   - Trivy is integrated to scan the Docker images for vulnerabilities, specifically checking for any high or critical severity issues. This helps identify potential security risks early in the development cycle, ensuring the application is deployed with secure dependencies and packages.
 
-## Sample
+### Sample
 
 <div align="center">
-  <h1><img src="./simple-webapp-flask-master/images/sonarcloud-report.png" alt="Logo">
+  <h1><img src="./images/sonarcloud-report.png" alt="Logo">
   </h1>
 </div>
+
+<p align="right"><a href="#readme-top">back to top</a></p>
 
 ---
 
@@ -209,16 +231,22 @@ adisabarakatadekemi@gmail.com
 
 Project Link: [DevSecOps Project](https://github.com/Adekemi02/devsecops-project)
 
+<p align="right"><a href="#readme-top">back to top</a></p>
+
 ---
 
 ## Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue if you have suggestions or find bugs.
 
+<p align="right"><a href="#readme-top">back to top</a></p>
+
 ---
 ## License
 
 Distributed under the MIT License. See <a href="https://github.com/Adekemi02/devsecops-project?tab=MIT-1-ov-file">LICENSE</a> for more information.
+
+<p align="right"><a href="#readme-top">back to top</a></p>
 
 ---
 
