@@ -38,6 +38,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: simple-webapp-flask-deployment
+  namespace: default
   labels:
     app: simple-webapp-flask
 spec:
