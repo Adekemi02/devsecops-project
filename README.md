@@ -12,7 +12,7 @@
 ---
 
 <div align="center">
-  <h1><img src="./static/blog/images/sonarcloud-report2.png" alt="Logo" width="90%" height="40%">
+  <h1><img src="./static/blog/simple-webapp-flask-master/images/sonarcloud-report2.png" alt="Logo" width="90%" height="40%">
   </h1>
 </div>
 
