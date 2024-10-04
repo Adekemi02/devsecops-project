@@ -20,7 +20,7 @@
   <p align="center">
     <a href="https://github.com/Adekemi02/devsecops-project#readme"><strong>Explore the Docs »</strong></a>
     <br />
-    <a href="https://github.com/Adekemi02/beeblog/blob/main/static/blog/images/sonarcloud-report2.png">View Demo</a>
+    <a href="https://github.com/Adekemi02/devsecops-project/blob/main/static/blog/images/sonarcloud-report2.png">View Demo</a>
     ·
     <a href="https://github.com/Adekemi02/devsecops-project/issues">Report Bug</a>
     ·
