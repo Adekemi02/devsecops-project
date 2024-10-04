@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Simple-webapp-flask-deployment
+  name: simple-webapp-flask-deployment
   labels:
     app: simple-webapp-flask
 spec:
