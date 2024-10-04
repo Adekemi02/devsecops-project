@@ -5,12 +5,11 @@ metadata:
 spec:
   selector:
     app: simple-webapp-flask 
-  type: LoadBalancer
+  type: NodePort
   ports:
   - protocol: TCP
     port: 80
     targetPort: 5000
     # nodePort: 43275
-  type: NodePort
-  selcetor:
-    app: simple-webapp-flask
+  # type: NodePort
+  
