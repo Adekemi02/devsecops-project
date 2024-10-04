@@ -124,5 +124,4 @@ jobs:
       - name: Wait for Pods to be Ready
         run: kubectl wait --for=condition=ready pod -l app=simple-webapp-flask --timeout=60s
 
-      - name: Expose the Application
-        run: kubectl port-forward service/simple-webapp-flask-service 5000:80 &
+    
