@@ -12,7 +12,7 @@
 ---
 
 <div align="center">
-  <h1><img src="./simple-webapp-flask-master/images/sonarcloud-report2.png" alt="Logo" width="90%" height="40%">
+  <h1><img src="./images/sonarcloud-report2.png" alt="Logo" width="90%" height="40%">
   </h1>
 </div>
 
@@ -20,7 +20,7 @@
   <p align="center">
     <a href="https://github.com/Adekemi02/devsecops-project#readme"><strong>Explore the Docs »</strong></a>
     <br />
-    <a href="https://github.com/Adekemi02/devsecops-project/blob/main/simple-webapp-flask-master/images/sonarcloud-report2.png">View Demo</a>
+    <a href="https://github.com/Adekemi02/devsecops-project/blob/main/images/sonarcloud-report2.png">View Demo</a>
     ·
     <a href="https://github.com/Adekemi02/devsecops-project/issues">Report Bug</a>
     ·
